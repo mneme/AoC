@@ -1,0 +1,30 @@
+{
+  "name": "AdventOfCode2016",
+  "version": "0.0.1",
+  "private": true,
+  "scripts": {
+    "test": "npm run -s test:mocha -- -R spec",
+    "test:mocha": "NODE_ENV=test node_modules/.bin/_mocha ./**/*.spec.js",
+    "test:coverage": "NODE_ENV=test istanbul cover node_modules/.bin/_mocha -- -R min ./**.spec.js",
+    "deploy": "npm-run-all deploy:*",
+    "deploy:eslint": "npm run eslint -s --no-color",
+    "deploy:test": "npm run test:mocha -s -- -R dot --no-color --bail",
+    "watch": "npm-run-all --parallel watch:*",
+    "watch:mocha": "npm run test:mocha -s -- -R spec -w",
+    "watch:eslint": "npm run eslint -s -- -w",
+    "watch:app": "supervisor -w src src/index.js",
+    "eslint": "esw --cache ./**/*.js"
+  },
+  "devDependencies": {
+    "chai": "latest",
+    "should": "latest",
+    "supervisor": "latest",
+    "mocha": "latest",
+    "eslint": "latest",
+    "eslint-watch": "latest",
+    "npm-run-all": "latest"
+  },
+  "dependencies": {
+    "ramda": "^0.22.1"
+  }
+}
