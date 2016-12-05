@@ -1,16 +1,13 @@
 R = require('ramda');
 
-let orientation = [[0,1], [1, 0], [0, -1], [-1, 0]];
-
-
 function mod(n, m) {
   return ((n % m) + m) % m;
 }
 
 function rotate(facing, dir){
-  let index = R.indexOf(facing, orientation),
-      newIndex = mod(index + (dir === "L" ? -1 : 1), 4);
-  return orientation[newIndex];
+  let [x,y] = facing,
+      rot = (dir === "R" ? 1 : -1) * Math.PI/2;  
+  return [Math.round(x*Math.cos(rot) - y*Math.sin(rot)), Math.round(x*Math.sin(rot) + y*Math.cos(rot))];
 }
 
 function move(position, facing, n){
