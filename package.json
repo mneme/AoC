@@ -3,9 +3,8 @@
   "version": "0.0.1",
   "private": true,
   "scripts": {
-    "test": "npm run -s test:mocha -- -R spec",
-    "test:mocha": "NODE_ENV=test node_modules/.bin/_mocha ./**/*.spec.js",
-    "test:coverage": "NODE_ENV=test istanbul cover node_modules/.bin/_mocha -- -R min ./**.spec.js",
+    "test": "NODE_ENV=test node_modules/.bin/_mocha ./**/*.spec.js",
+    "test:coverage": "NODE_ENV=test istanbul cover node_modules/.bin/_mocha -- -R min ./**/*.spec.js",
     "deploy": "npm-run-all deploy:*",
     "deploy:eslint": "npm run eslint -s --no-color",
     "deploy:test": "npm run test:mocha -s -- -R dot --no-color --bail",
@@ -18,7 +17,6 @@
   "devDependencies": {
     "chai": "latest",
     "should": "latest",
-    "supervisor": "latest",
     "mocha": "latest",
     "eslint": "latest",
     "eslint-watch": "latest",
