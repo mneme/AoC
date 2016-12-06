@@ -16,7 +16,7 @@ function d2(){
 
 function d3(){
   const instructions = require('fs').readFileSync('day3/day3.input', 'utf8');
-  //console.log('day3.1', day3.apply(instructions));
+  console.log('day3.1', day3.apply(instructions));
   console.log('day3.2', day3.apply2(instructions));
 }
 

@@ -25,4 +25,3 @@ exports.apply2 = function(input){
   const transposed = transpose([], parse(input))
   return countValidTriangles(transposed);
 }
-
