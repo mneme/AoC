@@ -4,6 +4,6 @@ Uses some version of Node 6+
 
 `npm install` as usual for deps.
 
-`npm test` for well yes, tests.
+`npm test` for well yeah, tests.
 
-`node index.js` to get my answers.
+`node index.js` to get the answers.
