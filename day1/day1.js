@@ -1,3 +1,8 @@
+/*
+  Seems like tail recurssion has some problems, this will overwflow the stack with too much input. also API isnt very nice.
+  Oh, twice isnt very nice but iteration the old fashioned way was just faster.
+*/
+
 R = require('ramda'),
 immutable = require('immutable');
 
