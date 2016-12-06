@@ -53,6 +53,6 @@ function twice(visited, position, facing, head, ...rest){
   return twice(visited, position, facing, ...rest) 
 }
 
-module.exports.follow = R.curry(follow)([0,0],[0,1]);
-module.exports.distance = R.curry(distance)([0,0]);
-module.exports.twice = R.curry(twice)(immutable.Set.of([0,0]),[0,0],[0,1]);
+exports.follow = R.curry(follow)([0,0],[0,1]);
+exports.distance = R.curry(distance)([0,0]);
+exports.twice = R.curry(twice)(immutable.Set.of([0,0]),[0,0],[0,1]);
