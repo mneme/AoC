@@ -1,10 +1,11 @@
 /*
-  Seems like tail recurssion has some problems, this will overwflow the stack with too much input. also API isnt very nice.
-  Oh, twice isnt very nice but iteration the old fashioned way was just faster.
+  Seems like tail recurssion isn't optimized, will cause stack overflow.
+  Api requiring ...spread is just annoying.
+  Twice uses fugly let x of y, but needs too much rebuild for me to bother.
 */
 
-R = require('ramda'),
-immutable = require('immutable');
+const R = require('ramda'),
+      immutable = require('immutable');
 
 function rotate(facing, dir){
   let [x,y] = facing,
