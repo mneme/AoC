@@ -1,5 +1,11 @@
-R = require('ramda'),
-immutable = require('immutable');
+/*
+  Seems like tail recurssion isn't optimized, will cause stack overflow.
+  Api requiring ...spread is just annoying.
+  Twice uses fugly let x of y, but needs too much rebuild for me to bother.
+*/
+
+const R = require('ramda'),
+      immutable = require('immutable');
 
 function rotate(facing, dir){
   let [x,y] = facing,
@@ -18,13 +24,13 @@ function parseInstruction(instruction){
   return [instruction.charAt(0),instruction.slice(1)];
 }
 
-function follow(position, facing, head, ...rest){
+function apply(position, facing, head, ...rest){
   if(!head){
     return position;
   }
   let [dir, n] = parseInstruction(head);
   facing = rotate(facing, dir);
-  return follow(move(position, facing, n), facing, ...rest);
+  return apply(move(position, facing, n), facing, ...rest);
 }
 
 function distance(origin, position){
@@ -53,6 +59,6 @@ function twice(visited, position, facing, head, ...rest){
   return twice(visited, position, facing, ...rest) 
 }
 
-exports.follow = R.curry(follow)([0,0],[0,1]);
+exports.apply = R.curry(apply)([0,0],[0,1]);
 exports.distance = R.curry(distance)([0,0]);
 exports.twice = R.curry(twice)(immutable.Set.of([0,0]),[0,0],[0,1]);

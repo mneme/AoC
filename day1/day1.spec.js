@@ -6,11 +6,11 @@ var chai = require('chai'),
 
 describe('day1', function(){
 
-  describe('follow', function () {
+  describe('apply', function () {
     it('should get right end position', function(){
-      day1.follow("R5", "L5", "R5", "R3").should.deep.equal([10, 2]);
-      day1.follow("R2", "L3").should.deep.equal([2, 3]);
-      day1.follow("R2", "R2", "R2").should.deep.equal([0, -2]);
+      day1.apply("R5", "L5", "R5", "R3").should.deep.equal([10, 2]);
+      day1.apply("R2", "L3").should.deep.equal([2, 3]);
+      day1.apply("R2", "R2", "R2").should.deep.equal([0, -2]);
     });
   });
 
