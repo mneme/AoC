@@ -4,7 +4,7 @@ const countValidTriangles = R.compose(R.length, R.filter(v=>v), R.map(testTriang
       parse = R.compose(R.map(R.compose(R.map(parseInt),R.split(/ +/),R.trim)),R.split('\n'));
 
 function testTriangle(triangle){
-  var sorted = triangle.sort((a, b) => a-b);
+  var sorted = R.sort((a, b) => a-b,triangle);
   return ((sorted[0] + sorted[1]) > sorted[2]);
 }
 
