@@ -2,6 +2,7 @@ day1 = require('./day1/day1.js');
 day2 = require('./day2/day2.js');
 day3 = require('./day3/day3.js');
 day4 = require('./day4/day4.js');
+day5 = require('./day4/day4.js');
 
 function d1(){
   const instructions  = require('fs').readFileSync('day1/day1.input', 'utf8').split(", ");
@@ -27,7 +28,13 @@ function d4(){
   console.log('day4.2', day4.apply2(instructions, 'north'));
 }
 
+function d5(){
+  console.log('day5.1', day5.passwordBasic('ojvtpuvg'));
+  console.log('day5.2', day5.passwordIndex('ojvtpuvg'));
+}
+
 d1();
 d2();
 d3();
 d4();
+d5();
