@@ -28,13 +28,7 @@ function d4(){
   console.log('day4.2', day4.apply2(instructions, 'north'));
 }
 
-function d5(){
-  console.log('day5.1', day5.passwordBasic('ojvtpuvg'));
-  console.log('day5.2', day5.passwordIndex('ojvtpuvg'));
-}
-
 d1();
 d2();
 d3();
 d4();
-d5();
