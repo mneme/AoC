@@ -1,3 +1,6 @@
+/*
+* Play with generators but all I want is lazyseq from clojure.
+*/
 R = require('ramda');
 
 let parens = /\[.*?\]/g;
@@ -19,19 +22,21 @@ const hasAbbaCode = R.both(
     R.compose(R.any(isAbbaCode), R.split(parens))
   );
 
+const potentialAbaCode = R.compose(
+  R.filter(isAbaCode),
+  R.reduce(R.concat, []),
+  R.map(aperture(3))
+)
+
 function hasAbaCode(str){
-  const potential = R.compose(
-    R.filter(isAbaCode),
-    R.reduce(R.concat, []),
-    R.map(aperture(3))
-  )
-
-  const aba = potential(str.split(parens)),
-        bab = potential(str.match(parens));
-
-  return R.length(R.intersectionWith((a, b) =>{
-      return [a[1],a[0],a[1]].join('') === b.join('')
-    }, aba, bab));
+  return R.compose(
+    R.length,
+    R.useWith(
+      R.intersectionWith((a, b) => a[1]+a[0]+a[1] === b.join('')),
+      [str => potentialAbaCode(str.split(parens)),
+      str => potentialAbaCode(str.match(parens))]
+    )
+  )(str, str);
 }
 
 function isAbaCode(arr){
@@ -50,5 +55,3 @@ const instructions = require('fs').readFileSync('./day7/day7.input', 'utf8');
 
 console.log('day7.1: ', count(hasAbbaCode, instructions));
 console.log('day7.2: ',count(hasAbaCode, instructions));
-
-

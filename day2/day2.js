@@ -1,5 +1,5 @@
 /*
-  Poorly ramda all the things. One-liners ftw, go to hell readability! Need to learn more about applicatives and trasnducers because rigt now I feel lost.
+  Poorly ramda all the things. One-liners ftw, go to hell readability!
 */
 const R = require('ramda');
 const moves = new Map([["U", [0, -1]],["D", [0, 1]],["L", [-1, 0]],["R", [1, 0]]]);

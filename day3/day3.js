@@ -1,27 +1,53 @@
 const R = require('ramda');
 
-const countValidTriangles = R.compose(R.length, R.filter(v=>v), R.map(testTriangle)),
-      parse = R.compose(R.map(R.compose(R.map(parseInt),R.split(/ +/),R.trim)),R.split('\n'));
+const parse = R.compose(
+    R.map(
+      R.compose(
+        R.map(parseInt),
+        R.split(/ +/),
+        R.trim
+      )
+    ),
+    R.split('\n')
+  );
 
-function testTriangle(triangle){
-  var sorted = R.sort((a, b) => a-b,triangle);
-  return ((sorted[0] + sorted[1]) > sorted[2]);
-}
+const testTriangle =
+  R.compose(
+    sorted => ((sorted[0] + sorted[1]) > sorted[2]),
+    R.sort((a, b) => a-b)
+  );
 
-function transpose(acc, list){
-  if(list.length > 2){
-    const transposed = R.transpose(R.take(3, list));
-    return transpose(R.concat(acc, transposed),R.drop(3, list));
+const countValidTriangles = 
+  R.compose(
+    R.length, 
+    R.filter(R.identity),
+    R.map(testTriangle)
+  );
+
+function group(n, list){
+  let acc = [];
+  for (var i = 0; i + n  <= list.length; i = i+n) {
+    acc.push(list.slice(i, i+n));
   }
   return acc;
 }
 
-exports.apply = function(input){
-  const data = parse(input)
-  return countValidTriangles(data);
-}
+const transpose = 
+  R.compose(
+    R.reduce(R.concat, []),
+    R.map(R.transpose),
+    R.curry(group)(3)
+  );
 
-exports.apply2 = function(input){
-  const transposed = transpose([], parse(input))
-  return countValidTriangles(transposed);
-}
+exports.apply = 
+  R.compose(
+    countValidTriangles,
+    parse
+  );
+
+exports.apply2 = 
+  R.compose(
+    countValidTriangles,
+    transpose,
+    parse
+  );

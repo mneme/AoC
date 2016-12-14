@@ -54,7 +54,7 @@ function setCharAt(str, char, i){
   return str.substr(0, i) + char + str.substr(i + 1);
 }
 
-function password(input, builder){
+function password(builder, input){
   let password = "________";
 
   for (let val of generate(input, 8)) {

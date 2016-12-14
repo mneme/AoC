@@ -1,29 +1,38 @@
+/*
+* One of theese functions is shamelessly stolen from someone else. Can you guess which?
+*/
 'use strict'
 const R = require('ramda');
 
+const groupEncryptedName = R.compose(
+    R.toPairs,
+    R.countBy(R.identity)
+  );
 
-const groupEncryptedName = R.compose(R.toPairs,R.countBy(R.identity)),
-      parse = R.compose(R.map(parseRow),R.split('\n'));
+const parseRow = R.compose(
+    (match) => [match[1], parseInt(match[2]), match[3]],
+    (row) => row.match(/(.+)-(\d*)\[(.+)\]/)
+  );
 
-function parseRow(row){
-  const matches = row.match(/(.+)-(\d*)\[(.+)\]/);
-  return [matches[1], parseInt(matches[2]), matches[3]];
-}
+const parse = R.compose(
+    R.map(parseRow),
+    R.split('\n')
+  );
 
-function checksum(name){
-  return R.compose(
+const checksumSorter = (a,b) => {
+  if (a[1] === b[1])
+    return a[0] < b[0] ? -1 : 1;
+  return b[1] - a[1];
+};
+
+const checksum = R.compose(
     R.join(''),
     R.map(R.head),
     R.take(5),
-    R.sort((a, b) => {
-      if (a[1] === b[1])
-        return a[0] < b[0] ? -1 : 1;
-      return b[1] - a[1];
-    }), 
+    R.sort(checksumSorter), 
     groupEncryptedName,
     R.replace(/-/g, '')
-  )(name);
-}
+  );
 
 function shift(char, n){
   return String.fromCharCode((char.charCodeAt(0) - 97 + n) % 26 + 97)
@@ -46,7 +55,7 @@ exports.apply = function(input){
   )(input)
 }
 
-exports.apply2= function(input, find){
+exports.apply2 = function(input, find){
   return R.compose(
     R.nth(1),
     R.find((row) => row[0].match(find)),

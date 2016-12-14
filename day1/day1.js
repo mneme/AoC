@@ -1,7 +1,5 @@
 /*
-  Seems like tail recurssion isn't optimized, will cause stack overflow.
-  Api requiring ...spread is just annoying.
-  Twice uses fugly let x of y, but needs too much rebuild for me to bother.
+  Will cause stack overflow and currying is a poor replacment for pattern matching.
 */
 
 const R = require('ramda'),
